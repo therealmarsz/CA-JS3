@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Average Exam Results</title>
+  <link href="styles/bootstrap.min.css" rel="stylesheet" />
+  <link href="styles/styles.css" rel='stylesheet' />
+</head>
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm">
+          <h1 class='display-1'>Exam Results Average Calculator</h1>
+          <p class="lead">
+            <blockquote class="blockquote">
+              <p class="mb-0">Ever felt the need to know your grade given all your exam results?</p>
+            </blockquote>
+          </p>
+        </div>
+      </div>
+    <hr />
+      <div class="row mt-3">
+        <div class="col-12">
+          <div class="input-group input-group-lg">
+            <input max='100' min='0' id='scores' type="text" placeholder='Enter your score eg. 65, 34, 88'
+              class="form-control" />
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button"
+                onclick="calculateMyGradePlease()">Calculate</button>
+              <button class="btn btn-outline-danger" type="button" onclick="clearAll()">Clear</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="row mt-3 justify-content-center">
+        <h1 id='grade'>Enter results to begin...</h1>
+      </div>
+  
+    </div>
+
+  <script>
+    // 1) get the string that has been typed in the input box
+    // 2) split up the numbers into separate numbers, put them into an array
+    // 3) find the average number
+    // 4) using an if-else statement, find the letter grade for the average number
+    // 5) print the letter grade on the screen
+
+    function calculateMyGradePlease() {
+       const typedString = getStringFromInputBox();
+       const numbersArray = splitStringIntoNumbers(typedString);
+       const averageNumber = calculateAverage(numbersArray);
+       const grade = letterGrade(averageNumber);
+      // const print to HTML element
+
+      console.log(grade);
+      console.log(averageNumber);
+    
+      document.getElementById('grade').innerHTML = grade;
+    }
+
+    function getStringFromInputBox() {
+      let content = document.getElementById('scores').value;
+     return content;
+    }
+
+    function splitStringIntoNumbers(inputString) {
+      const numbers = inputString.split(',');
+      return numbers;
+    }
+
+    function calculateAverage(numbers) {
+      const calculateAverage = [];
+      let sum = 0;
+
+      for (let value of numbers) {
+        sum = sum + parseFloat(value);
+      }
+
+      let result = sum / numbers.length;
+      console.log("sum",sum);
+      console.log(result);
+      return result;
+    }
+
+    function letterGrade(number) {
+      console.log(number);
+      if (number >= 75) {
+        return "A1";
+      } else if (number >= 70 && number <75) {
+        return "A2";
+      } else if (number >= 65 && number <70) {
+        return "B3";
+      } else if (number >= 60 && number <65) {
+        return "B4";
+      } else if (number >=55 && number <60) {
+        return "C5";
+      } else if (number >=50 && number <55) {
+        return "C6";
+      } else if (number >=45 && number <50) {
+        return "D7";
+      } else if (number >=40 && number <45) {
+        return "E8";
+      } else if (number >=0 && number <40) {
+        return "F9";
+
+      }
+    }
+    function clearAll () {
+      document.getElementById("grade").innerHTML = "";
+      document.getElementById("scores").value = "";
+    }
+    </script>
+  </body>
+</html>
